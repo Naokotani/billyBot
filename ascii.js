@@ -1,7 +1,7 @@
 const dis = ['Never', 'Disrespect', 'Billy'];
 const god = ['Billy', 'Is', 'God'];
 const url = [
-   'https://tenor.com/view/billy-gif-9397734',
+  'https://tenor.com/view/billy-gif-9397734',
   'https://tenor.com/view/love-you-billy-grandma-kiss-gif-12022890',
   'https://tenor.com/view/billy-twister-movie-aunt-aunt-meg-gif-14584939',
   'https://tenor.com/view/aahh-little-billy-i-said-no-biting-gif-14254695',

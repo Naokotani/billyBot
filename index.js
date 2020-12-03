@@ -3,7 +3,7 @@ const figlet = require('figlet');
 const ascii = require("./ascii")
 const { prefix, token } = require('./config.json');
 const client = new Discord.Client();
-let mess = ['Never', 'Disrespect', 'Billy'];
+let gifWork = ascii.url.slice(0);
 let gif = false;
 let gifCount = 0;
 const back = "```"
@@ -27,13 +27,18 @@ function asciiMessage(e) {
 
 function chooseMess() {
   const r = getRandomInt(ascii.memes.length);
-  console.log(r);
   return ascii.memes[r];
 }
 
 function chooseGif() {
-  const r = getRandomInt(ascii.url.length);
-  return ascii.url[r];
+  const r = getRandomInt(gifWork.length);
+  const gifMess = gifWork[r];
+  gifWork.splice(r, 1)
+  if (gifWork.length === 0) {
+    gifWork = ascii.url.slice(0);
+    console.log(`Gifs rest to length ${gifWork.length}`)
+  }
+  return gifMess;
 }
 
 client.once('ready', () => {
@@ -52,7 +57,6 @@ client.on('message', message => {
       message.channel.send(asciiMessage(e))
       );
       gifCount ++;
-      console.log(`gifCount = ${gifCount}`)
       if (gifCount === 1) {
         gif = true;
       } 
