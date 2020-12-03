@@ -53,7 +53,7 @@ client.on('message', message => {
       );
       gifCount ++;
       console.log(`gifCount = ${gifCount}`)
-      if (gifCount === 2) {
+      if (gifCount === 1) {
         gif = true;
       } 
     }
