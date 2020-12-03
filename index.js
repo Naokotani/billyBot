@@ -4,6 +4,7 @@ const ascii = require("./ascii")
 const { prefix, token } = require('./config.json');
 const client = new Discord.Client();
 let gifWork = ascii.url.slice(0);
+let platWork = ascii.plats.slice(0);
 let gif = false;
 let gifCount = 0;
 const back = "```"
@@ -36,10 +37,16 @@ function chooseGif() {
   gifWork.splice(r, 1)
   if (gifWork.length === 0) {
     gifWork = ascii.url.slice(0);
-    console.log(`Gifs rest to length ${gifWork.length}`)
   }
   return gifMess;
 }
+
+function ranArray (a) {
+  const r = getRandomInt(a.length);
+  const m = a[r];
+  a.splice(r, 1);
+  return m;
+} 
 
 client.once('ready', () => {
 	console.log('Ready!');
@@ -48,7 +55,10 @@ client.once('ready', () => {
 client.on('message', message => {
 	if (message.content === `${prefix}billy`) {
     if (gif === true){
-          message.channel.send(chooseGif());
+          message.channel.send(ranArray(gifWork));
+          if (gifWork.length === 0) {
+            gifWork = ascii.url.slice(0);
+          }
           gifCount = 0;
           gif = false;
     } else {
@@ -60,8 +70,13 @@ client.on('message', message => {
       if (gifCount === 1) {
         gif = true;
       } 
+    } 
+  }
+  if (message.content === `${prefix}plat`) {
+    message.channel.send(ranArray(platWork));
+    if (platWork.length === 0) {
+      platWork = ascii.plats.slice(0);
     }
-    
   }
 });
 
