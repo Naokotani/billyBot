@@ -25,7 +25,7 @@ function asciiMessage(e) {
       font: font,
       horizontalLayout: 'default',
       verticalLayout: 'default',
-      width: 80,
+      width: 40,
       whitespaceBreak: true
   }));
   m = m.concat(back);
