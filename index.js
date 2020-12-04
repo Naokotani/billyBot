@@ -11,7 +11,6 @@ function getFont(){
   const fonts = figlet.fontsSync();
   const r = getRandomInt(fonts.length);
   return fonts[r];
-
 }
 
 function getRandomInt(max) {
