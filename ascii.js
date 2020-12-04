@@ -13,7 +13,9 @@ const url = [
   'https://i.makeagif.com/media/12-20-2015/nGrczp.gif',
   'https://thumbs.gfycat.com/ShabbyEagerIndianelephant-small.gif',
   'https://j.gifs.com/E80Zg0.gif',
-  'https://tenor.com/view/its-billy-im-billy-informing-my-name-is-billy-introduction-gif-12214521'
+  'https://tenor.com/view/its-billy-im-billy-informing-my-name-is-billy-introduction-gif-12214521',
+  'https://tenor.com/view/me-raise-hand-too-ido-gif-5622551',
+  'https://tenor.com/view/billy-joel-screensaver-headache-bounce-bouncing-head-gif-11795468'
 ]
 const memes = [
   ['Never', 'Disrespect', 'Billy'],

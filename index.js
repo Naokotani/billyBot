@@ -5,21 +5,27 @@ const { prefix, token } = require('./config.json');
 const client = new Discord.Client();
 let gifWork = ascii.url.slice(0);
 let platWork = ascii.plats.slice(0);
-let gif = false;
-let gifCount = 0;
 const back = "```"
+
+function getFont(){
+  const fonts = figlet.fontsSync();
+  const r = getRandomInt(fonts.length);
+  return fonts[r];
+
+}
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
 function asciiMessage(e) {
+  const font = getFont();
   let m = back
   m = m.concat(figlet.textSync(e, {
-      font: 'Standard',
+      font: font,
       horizontalLayout: 'default',
       verticalLayout: 'default',
-      width: 80,
+      width: 40,
       whitespaceBreak: true
   }));
   m = m.concat(back);
@@ -31,16 +37,6 @@ function chooseMess() {
   return ascii.memes[r];
 }
 
-function chooseGif() {
-  const r = getRandomInt(gifWork.length);
-  const gifMess = gifWork[r];
-  gifWork.splice(r, 1)
-  if (gifWork.length === 0) {
-    gifWork = ascii.url.slice(0);
-  }
-  return gifMess;
-}
-
 function ranArray (a) {
   const r = getRandomInt(a.length);
   const m = a[r];
@@ -48,28 +44,31 @@ function ranArray (a) {
   return m;
 } 
 
+function getMsgType () {
+  const r = getRandomInt(2);
+  console.log(r)
+  if (r !== 1) {
+    return true;
+  }
+}
+
 client.once('ready', () => {
 	console.log('Ready!');
 });
 
 client.on('message', message => {
 	if (message.content === `${prefix}billy`) {
-    if (gif === true){
+    
+    if (getMsgType() === true){
           message.channel.send(ranArray(gifWork));
           if (gifWork.length === 0) {
             gifWork = ascii.url.slice(0);
           }
-          gifCount = 0;
-          gif = false;
     } else {
       mess = chooseMess();
       mess.forEach(e =>
       message.channel.send(asciiMessage(e))
       );
-      gifCount ++;
-      if (gifCount === 1) {
-        gif = true;
-      } 
     } 
   }
   if (message.content === `${prefix}plat`) {
