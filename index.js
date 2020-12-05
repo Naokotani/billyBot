@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const figlet = require('figlet');
 const ascii = require("./ascii")
+const axios = require('axios');
 const { prefix, token } = require('./config.json');
 const client = new Discord.Client();
 let gifWork = ascii.url.slice(0);
@@ -71,12 +72,15 @@ client.on('message', message => {
     } 
   }
   if (message.content === `${prefix}plat`) {
-    message.channel.send(ranArray(platWork));
-    if (platWork.length === 0) {
-      platWork = ascii.plats.slice(0);
-    }
+    axios.get('http://inspirobot.me/api?generate=true')
+      .then(response => {
+        console.log(response.data);
+        message.channel.send(response.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 });
-
 
 client.login(token);
