@@ -22,8 +22,18 @@ const memes = [
   ['Billy', 'Is', 'God']
 ];
 const plats = [
-  'Please add some platitudes!'
+  'coping mechanism .... there is no coping mechanism, things are just what they are.',
+  'You only perform ur best when u try to make other people look good, otherwise u perform like mediocre.',
+  `it's true
+   assuming
+   everything else is perfect
+   timing, technique, breathing, cardio etc etc etc etc
+   patience`,
+   `you know how a gun fires a bullet. An explosion happens in a tiny space in the back of the bullet, which ejects the bullet from the shell. That is how you should breath with the AIR in your lungs as you throw a punch.`,
+
 ]
+
+
 
 exports.plats = plats;
 exports.memes = memes;
