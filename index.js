@@ -62,6 +62,7 @@ client.on('message', message => {
 
   const args = message.content.slice(prefix.length).trim().split(' ');
   const command = args.shift().toLowerCase();
+  const search = args.join(' ');
   
   if (command === `billy`) {
     
@@ -88,7 +89,7 @@ client.on('message', message => {
       });
   }
   if (command === `gif`) {
-    giphy.random(args[0]).then(function (res) {
+    giphy.random(search).then(function (res) {
       message.channel.send(res.data.url)
     });
   }
