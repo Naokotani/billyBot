@@ -89,9 +89,13 @@ client.on('message', message => {
       });
   }
   if (command === `gif`) {
-    giphy.random(search).then(function (res) {
-      message.channel.send(res.data.url)
-    });
+    try {
+      giphy.random(search).then(function (res) {
+        message.channel.send(res.data.url)
+      });
+    } catch(err) {
+      console.log(err)
+    }
   }
 });
 
