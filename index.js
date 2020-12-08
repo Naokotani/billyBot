@@ -87,7 +87,7 @@ client.on('message', message => {
         console.log(err);
       });
   }
-  if (command === `gif`) {
+  if (command === `giphy`) {
     giphy.random(args[0]).then(function (res) {
       message.channel.send(res.data.url)
     });
