@@ -2,7 +2,8 @@ const Discord = require('discord.js');
 const figlet = require('figlet');
 const ascii = require("./ascii")
 const axios = require('axios');
-const { prefix, token } = require('./config.json');
+const { prefix, token, giphyKey } = require('./config.json');
+const giphy = require('giphy-api')(giphyKey);
 const client = new Discord.Client();
 let gifWork = ascii.url.slice(0);
 let platWork = ascii.plats.slice(0);
@@ -57,7 +58,12 @@ client.once('ready', () => {
 });
 
 client.on('message', message => {
-	if (message.content === `${prefix}billy`) {
+  if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+  const args = message.content.slice(prefix.length).trim().split(' ');
+  const command = args.shift().toLowerCase();
+  
+  if (command === `billy`) {
     
     if (getMsgType() === true){
           message.channel.send(ranArray(gifWork));
@@ -71,7 +77,7 @@ client.on('message', message => {
       );
     } 
   }
-  if (message.content === `${prefix}plat`) {
+  if (command === `plat`) {
     axios.get('http://inspirobot.me/api?generate=true')
       .then(response => {
         console.log(response.data);
@@ -80,6 +86,11 @@ client.on('message', message => {
       .catch(err => {
         console.log(err);
       });
+  }
+  if (command === `gif`) {
+    giphy.random(args[0]).then(function (res) {
+      message.channel.send(res.data.url)
+    });
   }
 });
 
