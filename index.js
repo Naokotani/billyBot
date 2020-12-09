@@ -105,9 +105,6 @@ client.on('message', message => {
     }
   }
   if (command === 'tenor') {
-    console.log(args)
-    console.log(search)
-    console.log(args[0])
     if (args[0] > 0) {
       if (args[0] > 3) {
         args[0] = 3;
@@ -122,6 +119,7 @@ client.on('message', message => {
           });
         }).catch(console.error);
     } else {
+      console.log(search)
       Tenor.Search.Random(search, 1).then(Results => {
         Results.forEach(Post => {
             console.log(`Item ${Post.id} (Created: ${Post.created}) @ ${Post.url}`);
