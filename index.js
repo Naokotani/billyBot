@@ -1,10 +1,17 @@
 const Discord = require('discord.js');
+const client = new Discord.Client();
 const figlet = require('figlet');
 const ascii = require("./ascii")
 const axios = require('axios');
-const { prefix, token, giphyKey } = require('./config.json');
+const { prefix, token, giphyKey, tenorKey} = require('./config.json');
 const giphy = require('giphy-api')(giphyKey);
-const client = new Discord.Client();
+const Tenor = require("tenorjs").client({
+    "Key": tenorKey, // https://tenor.com/developer/keyregistration
+    "Filter": "off", // "off", "low", "medium", "high", not case sensitive
+    "Locale": "en_US", // Your locale here, case-sensitivity depends on input
+    "MediaFilter": "minimal", // either minimal or basic, not case sensitive
+    "DateFormat": "D/MM/YYYY - H:mm:ss A" // Change this accordingly
+});
 let gifWork = ascii.url.slice(0);
 let platWork = ascii.plats.slice(0);
 const back = "```"
@@ -95,6 +102,32 @@ client.on('message', message => {
       });
     } catch(err) {
       console.log(err)
+    }
+  }
+  if (command === 'tenor') {
+    console.log(args)
+    console.log(search)
+    console.log(args[0])
+    if (args[0] > 0) {
+      if (args[0] > 3) {
+        args[0] = 3;
+      }
+      const s = args.slice(1).join(' ');
+      console.log(`sliced args = ${s}`)
+      console.log(`search number = ${args[0]}`)
+      Tenor.Search.Random(s, args[0]).then(Results => {
+        Results.forEach(Post => {
+            console.log(`Item ${Post.id} (Created: ${Post.created}) @ ${Post.url}`);
+            message.channel.send(Post.url)
+          });
+        }).catch(console.error);
+    } else {
+      Tenor.Search.Random(search, 1).then(Results => {
+        Results.forEach(Post => {
+            console.log(`Item ${Post.id} (Created: ${Post.created}) @ ${Post.url}`);
+            message.channel.send(Post.url)
+          });
+        }).catch(console.error);
     }
   }
 });
