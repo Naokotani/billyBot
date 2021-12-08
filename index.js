@@ -1,3 +1,4 @@
+A bunch of crap lol. Garbage.
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const figlet = require('figlet');
